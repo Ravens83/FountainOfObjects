@@ -6,7 +6,7 @@ public static class Toolbox
 {
     public static string ReadString(string prompt) //prevents empty/null string inputs. But not space input.
     {
-	    string result;
+	    string? result;
 	    do
 	    {
 		    Console.Write(prompt);

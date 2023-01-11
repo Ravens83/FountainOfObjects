@@ -4,17 +4,17 @@ namespace FountainOfObjectsClassLib;
 public interface IRoom
 {
     public string Sense();
-    public string SetPlayerEffect(PlayerChar player);
-    public IRoom RoomAltered(Location loc, ListOfCommands.C action);
+    public string SetPlayerEffect(PlayerChar p);
+    public IRoom RoomAltered(ListOfCommands.C action);
 
-    public bool SpecialEventRoom {get;}
+    public bool SpecialEventRoom {get;} //can alter somthing in the cavern outside of its own location
 }
 
 public class EmptyRoom : IRoom
 {
     public string Sense() => "Empty";
     public string SetPlayerEffect(PlayerChar p) => "Empty";
-    public IRoom RoomAltered(Location loc, ListOfCommands.C action) => this;
+    public IRoom RoomAltered(ListOfCommands.C action) => this;
     public bool SpecialEventRoom {get;} = false;
 }
 
@@ -22,7 +22,7 @@ public class Enterance : IRoom
 {
     public string Sense() => "Empty";
     public string SetPlayerEffect(PlayerChar p) => "You see light coming from the cavern entrance.";
-    public IRoom RoomAltered(Location loc, ListOfCommands.C action) => this;
+    public IRoom RoomAltered(ListOfCommands.C action) => this;
     public bool SpecialEventRoom {get;} = false;
 }
 
@@ -31,7 +31,7 @@ public class FountainRoomInactive : IRoom
     public string Sense() => "Empty";
     public string SetPlayerEffect(PlayerChar p) => "You hear water dripping in this room. "+
                                     "The Fountain of Objects is here!";
-    public IRoom RoomAltered(Location loc, ListOfCommands.C action)
+    public IRoom RoomAltered(ListOfCommands.C action)
     {
         if(action == ListOfCommands.C.enable_fountain) return new FountainRoomActive();
         else return this;
@@ -44,7 +44,7 @@ public class FountainRoomActive : IRoom
     public string Sense() => "Empty";
     public string SetPlayerEffect(PlayerChar p) => "You hear the rushing water from the Fountain of Objects. "+
                                     "It has been reactivated!";
-    public IRoom RoomAltered(Location loc, ListOfCommands.C action) => this; 
+    public IRoom RoomAltered(ListOfCommands.C action) => this; 
 
     public bool SpecialEventRoom {get;} = false;
 }
@@ -57,7 +57,7 @@ public class PitRoom : IRoom
         p.Alive = false;
         return "You fall into a bottomless pit.";
     }
-    public IRoom RoomAltered(Location loc, ListOfCommands.C action) => this;
+    public IRoom RoomAltered(ListOfCommands.C action) => this;
 
     public bool SpecialEventRoom {get;} = false;
 }
@@ -70,7 +70,7 @@ public class Maelstrom : IRoom
         p.Loc = new Location(p.Loc.X-1,p.Loc.Y+2);
         return "The Maelstrom pushes you around.";
     }
-    public IRoom RoomAltered(Location loc, ListOfCommands.C action) => new EmptyRoom();
+    public IRoom RoomAltered(ListOfCommands.C action) => new EmptyRoom();
 
     public bool SpecialEventRoom {get;} = true;
 }
@@ -83,7 +83,7 @@ public class Amarok : IRoom
         p.Alive = false;
         return "As you blindly stumble into the room of an Amarok it neatle tears off you head.";
     }
-    public IRoom RoomAltered(Location loc, ListOfCommands.C action)  => new EmptyRoom();
+    public IRoom RoomAltered(ListOfCommands.C action)  => new EmptyRoom();
 
     public bool SpecialEventRoom {get;} = false;
 }

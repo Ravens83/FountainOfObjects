@@ -31,10 +31,13 @@ public class Cavern
             }
         }
 
-        Rooms[0,0] = new Enterance();               //IMPORTANT: nterance must always be at 0,0 as it is now
+        Rooms[0,0] = new Enterance();               //IMPORTANT: Enterance must always be at 0,0 as it is now
         Rooms[2,3] = new FountainRoomInactive();
         Rooms[2,0] = new PitRoom();
         Rooms[0,3] = new Maelstrom();
+        Rooms[3,1] = new Amarok();
+        Rooms[0,1] = new Amarok();
+        Rooms[1,0] = new Amarok();
     }
 
     public IRoom GetRoom(Location loc)
@@ -130,25 +133,40 @@ public class Cavern
     public string PlayerAction(PlayerChar p, ListOfCommands.C pCommand)
     {
         string output = "Empty";
+        Location tempLoc = new Location(p.Loc.X,p.Loc.Y);
         switch (pCommand)
         {
             case ListOfCommands.C.move_east:
-                output = TryToMove(p,p.Loc.X,p.Loc.Y+1);
+                tempLoc = new Location(p.Loc.X,p.Loc.Y+1);
+                output = TryToMove(p,tempLoc);
                 break;
             case ListOfCommands.C.move_west:
-                output = TryToMove(p,p.Loc.X,p.Loc.Y-1);
+                tempLoc = new Location(p.Loc.X,p.Loc.Y-1);
+                output = TryToMove(p,tempLoc);
                 break;
             case ListOfCommands.C.move_north:
-                output = TryToMove(p,p.Loc.X-1,p.Loc.Y);
+                tempLoc = new Location(p.Loc.X-1,p.Loc.Y);
+                output = TryToMove(p,tempLoc);
                 break;
             case ListOfCommands.C.move_south:
-                output = TryToMove(p,p.Loc.X+1,p.Loc.Y);
+                tempLoc = new Location(p.Loc.X+1,p.Loc.Y);
+                output = TryToMove(p,tempLoc);
                 break;
             case ListOfCommands.C.shoot_east:
+                tempLoc = new Location(p.Loc.X,p.Loc.Y+1);
+                output = ShootBow(tempLoc, p, pCommand);
                 break;
             case ListOfCommands.C.shoot_west:
+                tempLoc = new Location(p.Loc.X,p.Loc.Y-1);
+                output = ShootBow(tempLoc, p, pCommand);
+                break;
             case ListOfCommands.C.shoot_north:
+                tempLoc = new Location(p.Loc.X-1,p.Loc.Y);
+                output = ShootBow(tempLoc, p, pCommand);
+                break;
             case ListOfCommands.C.shoot_south:
+                tempLoc = new Location(p.Loc.X+1,p.Loc.Y);
+                output = ShootBow(tempLoc, p, pCommand);
                 break;
             case ListOfCommands.C.enable_fountain:
                 output = AlterARoom(p.Loc,pCommand);
@@ -158,9 +176,11 @@ public class Cavern
         return output;
     }
 
-    public string ShootBow(Location loc, ListOfCommands.C pCommand)
+    public string ShootBow(Location loc, PlayerChar p, ListOfCommands.C pCommand)
     {
         string output = "";
+        if(!UseAnItem(p, new Arrow())) return "Empty";
+
         if(LegalLocation(loc))
         {
             output = AlterARoom(loc,pCommand);
@@ -169,9 +189,24 @@ public class Cavern
         return output;
     }
 
-    public string TryToMove(PlayerChar p, int X, int Y)
+    public bool UseAnItem(PlayerChar p, IEquipment item)
     {
-        Location newLocation = new Location(X,Y);
+        int i;
+        int count = p.Equipment.Count();
+        for(i=0; i<count; i++)
+        {
+            if(p.Equipment[i].Name == item.Name)
+            {
+                p.Equipment.RemoveAt(i);
+                return true;
+            }
+        }
+    
+        return false;
+    }
+
+    public string TryToMove(PlayerChar p, Location newLocation)
+    {
         if(LegalLocation(newLocation))
         {
             p.Loc = newLocation;
@@ -183,12 +218,11 @@ public class Cavern
     public string AlterARoom(Location loc, ListOfCommands.C pCommand)
     {
         var oldRoomType = Rooms[loc.X,loc.Y].GetType();
-        IRoom updatedRoom = Rooms[loc.X,loc.Y].RoomAltered(loc,pCommand);
+        IRoom updatedRoom = Rooms[loc.X,loc.Y].RoomAltered(pCommand);
         Rooms[loc.X,loc.Y] = updatedRoom;
 
         if(oldRoomType == updatedRoom.GetType()) return "Empty";
         else return "Room Changed";
-
     }
 
     /*public bool UpdateARoom(Location loc)

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\runew\\source\\VSCodeRepos\\PlayersGuideProjects\\L31\\FountainOfObjects\\FountainOfObjectsClassLib\\FountainOfObjectsClassLib.csproj",
+      "projectUniqueName": "C:\\Users\\runew\\source\\VSCodeRepos\\PlayersGuideProjects\\L31\\FountainOfObjects\\FountainOfObjects\\FountainOfObjectsClassLib\\FountainOfObjectsClassLib.csproj",
       "projectName": "FountainOfObjectsClassLib",
-      "projectPath": "C:\\Users\\runew\\source\\VSCodeRepos\\PlayersGuideProjects\\L31\\FountainOfObjects\\FountainOfObjectsClassLib\\FountainOfObjectsClassLib.csproj",
+      "projectPath": "C:\\Users\\runew\\source\\VSCodeRepos\\PlayersGuideProjects\\L31\\FountainOfObjects\\FountainOfObjects\\FountainOfObjectsClassLib\\FountainOfObjectsClassLib.csproj",
       "packagesPath": "C:\\Users\\runew\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\runew\\source\\VSCodeRepos\\PlayersGuideProjects\\L31\\FountainOfObjects\\FountainOfObjectsClassLib\\obj\\",
+      "outputPath": "C:\\Users\\runew\\source\\VSCodeRepos\\PlayersGuideProjects\\L31\\FountainOfObjects\\FountainOfObjects\\FountainOfObjectsClassLib\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\runew\\AppData\\Roaming\\NuGet\\NuGet.Config",
