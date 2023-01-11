@@ -23,7 +23,7 @@ public class FountainUI
 
     public void LossPrint(string deathMessage)
     {
-        Console.WriteLine(deathMessage);
+        if(deathMessage != "Empty") Console.WriteLine(deathMessage);
         Console.WriteLine("You seem to have gone and died. Game Over.");
     }
 
@@ -36,7 +36,7 @@ public class FountainUI
 
     public void PrintRoomEffect(string roomMsg)
     {
-        Console.WriteLine(roomMsg);
+        if(roomMsg != "Empty") Console.WriteLine(roomMsg);
     }
 
     public ListOfCommands.C GetPlayerCommand()

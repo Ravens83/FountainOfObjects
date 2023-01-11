@@ -78,8 +78,7 @@ public class PitRoom : IRoom
 public class Maelstrom : IRoom
 {
     public string Sense() => "You hear the growling and groaning of a maelstrom nearby.";
-    public string RoomMessage() => "Epmty";//"By some magic you are able to be in the same room as a Maelstrom. "
-           // +"The Maelstrom flees in frustation!";
+    public string RoomMessage() => "Epmty";
     public string SetPlayerEffect(PlayerChar p)
     {
         if(Toolbox.UseAnItem(p, new WindShieldCharm()))

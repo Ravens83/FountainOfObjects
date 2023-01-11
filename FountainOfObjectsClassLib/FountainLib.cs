@@ -52,7 +52,7 @@ public class FountainGame
         IRoom curRoom = _cavern.GetRoom(_player.Loc);
         string roomMsg = curRoom.SetPlayerEffect(_player);
         do{
-            if(curRoom.SpecialEventRoom)
+            if(curRoom.SpecialEventRoom)    //FIX NEEDED - inf loop if the room keeps being a SpecialEvent Room
             {
                 _cavern.FixPlayerLocation(_player);
                 _ui.PrintRoomEffect(roomMsg);
@@ -67,6 +67,8 @@ public class FountainGame
     }
 
     public void DoSpecialRoomAction(IRoom curRoom, Location roomLoc) //must be expanded with any new special room
+                                                                     //room must become a non-special room at some point
+                                                                    //to avoid inf loop - FIX NEEDED
     {
         IRoom emptyRoom = new EmptyRoom();
         IRoom specialRoomMaelstrom = new Maelstrom();
@@ -89,7 +91,7 @@ public class FountainGame
 
         if(curRoom.GetType() == SpecialRoomAmarok.GetType())
         {
-            if(_player.Alive) _cavern.AlterARoom(roomLoc,ListOfCommands.C.invalid_command);
+            _cavern.AlterARoom(roomLoc,ListOfCommands.C.invalid_command);
         }
     }
 
