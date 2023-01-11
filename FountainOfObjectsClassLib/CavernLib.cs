@@ -38,6 +38,10 @@ public class Cavern
         Rooms[3,1] = new Amarok();
         Rooms[0,1] = new Amarok();
         Rooms[1,0] = new Amarok();
+        Rooms[1,1] = new ItemRoom();
+        Rooms[1,2] = new ItemRoom(new WindShieldCharm());
+        Rooms[2,1] = new ItemRoom(new GlassSword());
+        Rooms[2,2] = new ItemRoom(new GrapplingHook());
     }
 
     public IRoom GetRoom(Location loc)
@@ -179,11 +183,11 @@ public class Cavern
     public string ShootBow(Location loc, PlayerChar p, ListOfCommands.C pCommand)
     {
         string output = "";
-        if(!UseAnItem(p, new Arrow())) return "Empty";
+        if(!UseAnItem(p, new Arrow())) return "Out of Arrows.";
 
         if(LegalLocation(loc))
         {
-            output = AlterARoom(loc,pCommand);
+            output = "Bowshot " + AlterARoom(loc,pCommand);
         }
 
         return output;
