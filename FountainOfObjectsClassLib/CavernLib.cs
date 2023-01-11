@@ -38,7 +38,7 @@ public class Cavern
         Rooms[3,1] = new Amarok();
         Rooms[0,1] = new Amarok();
         Rooms[1,0] = new Amarok();
-        Rooms[1,1] = new ItemRoom();
+        Rooms[1,1] = new ItemRoom(new GlassSword());
         Rooms[1,2] = new ItemRoom(new WindShieldCharm());
         Rooms[2,1] = new ItemRoom(new GlassSword());
         Rooms[2,2] = new ItemRoom(new GrapplingHook());
@@ -90,7 +90,7 @@ public class Cavern
         Location roomloc;
         List<string> output = new List<string>();
 
-        output.Add(GetRoom(player.Loc).SetPlayerEffect(player));
+        output.Add(GetRoom(player.Loc).RoomMessage());
 
         for(roomx = player.Loc.X-1; roomx <= player.Loc.X+1; roomx++)
         {
@@ -175,7 +175,9 @@ public class Cavern
             case ListOfCommands.C.enable_fountain:
                 output = AlterARoom(p.Loc,pCommand);
                 break;
-
+            case ListOfCommands.C.show_equipment:
+            case ListOfCommands.C.help_menu:
+                break;
         }
         return output;
     }
@@ -183,7 +185,7 @@ public class Cavern
     public string ShootBow(Location loc, PlayerChar p, ListOfCommands.C pCommand)
     {
         string output = "";
-        if(!UseAnItem(p, new Arrow())) return "Out of Arrows.";
+        if(!Toolbox.UseAnItem(p, new Arrow())) return "Out of Arrows.";
 
         if(LegalLocation(loc))
         {
@@ -193,21 +195,7 @@ public class Cavern
         return output;
     }
 
-    public bool UseAnItem(PlayerChar p, IEquipment item)
-    {
-        int i;
-        int count = p.Equipment.Count();
-        for(i=0; i<count; i++)
-        {
-            if(p.Equipment[i].Name == item.Name)
-            {
-                p.Equipment.RemoveAt(i);
-                return true;
-            }
-        }
-    
-        return false;
-    }
+
 
     public string TryToMove(PlayerChar p, Location newLocation)
     {
@@ -229,13 +217,6 @@ public class Cavern
         else return "Room Changed";
     }
 
-    /*public bool UpdateARoom(Location loc)
-    {
-        if(LegalLocation(loc))
-        {
-            IRoom tmp = 
-        }
-    }*/
 
     public override string ToString()
     {

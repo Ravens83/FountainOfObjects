@@ -4,6 +4,22 @@ namespace FountainOfObjectsClassLib;
 
 public static class Toolbox
 {
+    public static bool UseAnItem(PlayerChar p, IEquipment item)
+    {
+        int i;
+        int count = p.Equipment.Count();
+        for(i=0; i<count; i++)
+        {
+            if(p.Equipment[i].Name == item.Name)
+            {
+                p.Equipment.RemoveAt(i);
+                return true;
+            }
+        }
+    
+        return false;
+    }
+
     public static string ReadString(string prompt) //prevents empty/null string inputs. But not space input.
     {
 	    string? result;

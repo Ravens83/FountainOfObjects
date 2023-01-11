@@ -43,6 +43,7 @@ public class FountainGame
         string result = "Empty";
 
         ListOfCommands.C playerCommand = _ui.GetPlayerCommand(); //player does action:
+        if(playerCommand == ListOfCommands.C.show_equipment) _ui.ShowInventory(_player);
         result = _cavern.PlayerAction(_player, playerCommand);
         _ui.PrintAction(result);
 
@@ -70,6 +71,7 @@ public class FountainGame
         IRoom emptyRoom = new EmptyRoom();
         IRoom specialRoomMaelstrom = new Maelstrom();
         IRoom SpecialRoomItemRoom = new ItemRoom();
+        IRoom SpecialRoomAmarok = new Amarok();
 
         if(curRoom.GetType() == specialRoomMaelstrom.GetType())
         {
@@ -83,6 +85,11 @@ public class FountainGame
         if(curRoom.GetType() == SpecialRoomItemRoom.GetType())
         {
             _cavern.AlterARoom(roomLoc, ListOfCommands.C.invalid_command);
+        }
+
+        if(curRoom.GetType() == SpecialRoomAmarok.GetType())
+        {
+            if(_player.Alive) _cavern.AlterARoom(roomLoc,ListOfCommands.C.invalid_command);
         }
     }
 

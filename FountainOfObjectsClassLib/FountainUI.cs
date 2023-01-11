@@ -69,5 +69,30 @@ public class FountainUI
         Console.WriteLine("-----------------------------------------------------------");
         Console.WriteLine($"You are in the room at (Row={p.Loc.X}, Column={p.Loc.Y}).");
     }
+
+    public void ShowInventory(PlayerChar p)
+    {
+        Console.WriteLine("Your Inventory contains the following items:");
+        foreach(IEquipment eqqy in p.Equipment)
+        {
+            Console.WriteLine(eqqy.Name);
+        }
+        string command = "";
+        while(command != "exit")
+        {
+            command = Toolbox.ReadString("Would you like to \"learn\" about an item or \"exit\"?: ");
+            if(command == "learn")
+            PrintItemInfo(p);
+        }
+    }
+
+    public void PrintItemInfo(PlayerChar p)
+    {
+        int itemnr = 0;
+        int countnumber = p.Equipment.Count();
+        itemnr = Toolbox.ReadInt($"Choose inventory item by number between 1 and {countnumber}: ", 1, countnumber);
+        Console.WriteLine(p.Equipment[itemnr-1].Description);
+    }
+
 }
 

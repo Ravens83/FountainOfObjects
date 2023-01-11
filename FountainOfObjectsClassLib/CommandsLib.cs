@@ -14,6 +14,7 @@ public static class ListOfCommands
         shoot_south,
         enable_fountain,
         show_equipment,
+        help_menu,
         invalid_command}
 
     public static C CommandMatcher(string input)
@@ -27,6 +28,7 @@ public static class ListOfCommands
         if(input == "shoot north") return C.shoot_north;
         if(input == "shoot south") return C.shoot_south;
         if(input == "show equipment") return C.show_equipment;
+        if(input == "help menu") return C.help_menu;
         if(input == "enable fountain") return C.enable_fountain;
         else return C.invalid_command;
     }

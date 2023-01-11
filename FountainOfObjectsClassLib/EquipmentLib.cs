@@ -29,6 +29,6 @@ public class WindShieldCharm : IEquipment
 public class GrapplingHook : IEquipment
 {
     public string Name {get;} = "Grappling Hook";
-    public string Description {get;} = "The Grappling Hook let's you traverse a pit to get to the othr side."
+    public string Description {get;} = "The Grappling Hook let's you traverse a pit to get to the other side."
                     + " But the rope is old and rotten and will only work once.";
 }
