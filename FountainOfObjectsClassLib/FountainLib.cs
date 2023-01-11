@@ -19,7 +19,27 @@ public class PlayerChar
 }
 
 public class FountainUI
-{   public void LossPrint(string deathMessage)
+{   
+    public void PrintAction(string actionResult)
+    {
+        switch(actionResult)
+        {
+            case "Bowshot Room Changed":
+                Console.WriteLine("Your bowshot has killed a beast in the room!");
+                break;
+            case "Bowshot Empty":
+                Console.WriteLine("You hit nothing and the arrow was wasted.");
+                break;
+            case "Out of Arrows.":
+                Console.WriteLine("You have run out of arrows and cannot shoot.");
+                break;
+            case "Empty":
+            case null:
+                break;
+        }
+    }
+
+    public void LossPrint(string deathMessage)
     {
         Console.WriteLine(deathMessage);
         Console.WriteLine("You seem to have gone and died. Game Over.");
@@ -114,7 +134,7 @@ public class FountainGame
 
         ListOfCommands.C playerCommand = _ui.GetPlayerCommand(); //player does action:
         result = _cavern.PlayerAction(_player, playerCommand);
-
+        _ui.PrintAction(result);
 
         _cavern.FixPlayerLocation(_player); //check if location still legal;
         Location rememberLoc = new Location(_player.Loc.X,_player.Loc.Y);
@@ -135,18 +155,24 @@ public class FountainGame
         return roomMsg;
     }
 
-    public void DoSpecialRoomAction(IRoom curRoom, Location roomLoc)
+    public void DoSpecialRoomAction(IRoom curRoom, Location roomLoc) //must be expanded with any new special room
     {
         IRoom emptyRoom = new EmptyRoom();
-        IRoom specialRoom1 = new Maelstrom();
+        IRoom specialRoomMaelstrom = new Maelstrom();
+        IRoom SpecialRoomItemRoom = new ItemRoom();
 
-        if(curRoom.GetType() == specialRoom1.GetType())
+        if(curRoom.GetType() == specialRoomMaelstrom.GetType())
         {
             Location newLoc = new Location(roomLoc.X+1,roomLoc.Y-2);
             if(_cavern.GetRoom(newLoc).GetType() == emptyRoom.GetType())
-                _cavern.SetRoom(specialRoom1,newLoc);
+                _cavern.SetRoom(specialRoomMaelstrom,newLoc);
             
             _cavern.AlterARoom(roomLoc,ListOfCommands.C.invalid_command);
+        }
+
+        if(curRoom.GetType() == SpecialRoomItemRoom.GetType())
+        {
+            _cavern.AlterARoom(roomLoc, ListOfCommands.C.invalid_command);
         }
     }
 

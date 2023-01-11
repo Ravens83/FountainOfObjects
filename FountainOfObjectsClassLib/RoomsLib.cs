@@ -7,7 +7,7 @@ public interface IRoom
     public string SetPlayerEffect(PlayerChar p);
     public IRoom RoomAltered(ListOfCommands.C action);
 
-    public bool SpecialEventRoom {get;} //can alter somthing in the cavern outside of its own location
+    public bool SpecialEventRoom {get;} //can alter something in the cavern when player enters it
 }
 
 public class EmptyRoom : IRoom
@@ -87,3 +87,27 @@ public class Amarok : IRoom
 
     public bool SpecialEventRoom {get;} = false;
 }
+
+public class ItemRoom : IRoom
+{
+    IEquipment item {get;}
+    public string Sense() => "Empty";
+    public string SetPlayerEffect(PlayerChar p)
+    {
+        p.Equipment.Add(item);
+        return $"You have found a {item.Name}!";
+    }
+    public IRoom RoomAltered(ListOfCommands.C action)  => new EmptyRoom();
+
+    public bool SpecialEventRoom {get;} = true;
+
+    public ItemRoom()
+    {
+        item = new Arrow();
+    }
+    public ItemRoom(IEquipment inItem)
+    {
+        item = inItem;
+    }
+}
+
