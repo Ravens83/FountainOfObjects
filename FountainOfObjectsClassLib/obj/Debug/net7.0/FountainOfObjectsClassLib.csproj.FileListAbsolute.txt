@@ -1,0 +1,12 @@
+C:\Users\runew\source\VSCodeRepos\PlayersGuideProjects\L31\FountainOfObjects\FountainOfObjectsClassLib\bin\Debug\net7.0\FountainOfObjectsClassLib.deps.json
+C:\Users\runew\source\VSCodeRepos\PlayersGuideProjects\L31\FountainOfObjects\FountainOfObjectsClassLib\bin\Debug\net7.0\FountainOfObjectsClassLib.dll
+C:\Users\runew\source\VSCodeRepos\PlayersGuideProjects\L31\FountainOfObjects\FountainOfObjectsClassLib\bin\Debug\net7.0\FountainOfObjectsClassLib.pdb
+C:\Users\runew\source\VSCodeRepos\PlayersGuideProjects\L31\FountainOfObjects\FountainOfObjectsClassLib\obj\Debug\net7.0\FountainOfObjectsClassLib.csproj.AssemblyReference.cache
+C:\Users\runew\source\VSCodeRepos\PlayersGuideProjects\L31\FountainOfObjects\FountainOfObjectsClassLib\obj\Debug\net7.0\FountainOfObjectsClassLib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\runew\source\VSCodeRepos\PlayersGuideProjects\L31\FountainOfObjects\FountainOfObjectsClassLib\obj\Debug\net7.0\FountainOfObjectsClassLib.AssemblyInfoInputs.cache
+C:\Users\runew\source\VSCodeRepos\PlayersGuideProjects\L31\FountainOfObjects\FountainOfObjectsClassLib\obj\Debug\net7.0\FountainOfObjectsClassLib.AssemblyInfo.cs
+C:\Users\runew\source\VSCodeRepos\PlayersGuideProjects\L31\FountainOfObjects\FountainOfObjectsClassLib\obj\Debug\net7.0\FountainOfObjectsClassLib.csproj.CoreCompileInputs.cache
+C:\Users\runew\source\VSCodeRepos\PlayersGuideProjects\L31\FountainOfObjects\FountainOfObjectsClassLib\obj\Debug\net7.0\FountainOfObjectsClassLib.dll
+C:\Users\runew\source\VSCodeRepos\PlayersGuideProjects\L31\FountainOfObjects\FountainOfObjectsClassLib\obj\Debug\net7.0\refint\FountainOfObjectsClassLib.dll
+C:\Users\runew\source\VSCodeRepos\PlayersGuideProjects\L31\FountainOfObjects\FountainOfObjectsClassLib\obj\Debug\net7.0\FountainOfObjectsClassLib.pdb
+C:\Users\runew\source\VSCodeRepos\PlayersGuideProjects\L31\FountainOfObjects\FountainOfObjectsClassLib\obj\Debug\net7.0\ref\FountainOfObjectsClassLib.dll
