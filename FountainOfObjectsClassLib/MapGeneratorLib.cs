@@ -37,10 +37,7 @@ public class MapGenerator
         roomlist.Add(new Amarok());
         roomlist.Add(new Amarok());
         roomlist.Add(new PitRoom());
-        roomlist.Add(new PitRoom());
         roomlist.Add(new Maelstrom());
-        roomlist.Add(new ItemRoom(RandomItem()));
-        roomlist.Add(new ItemRoom(RandomItem()));
         roomlist.Add(new ItemRoom(RandomItem()));
         roomlist.Add(new ItemRoom(RandomItem()));
 
@@ -51,9 +48,12 @@ public class MapGenerator
                 for(int i = 0; i < 13; i++) roomlist.Add(RandomRoom());
                 roomlist.Add(new ItemRoom(RandomItem()));
                 roomlist.Add(new ItemRoom(RandomItem()));
+                roomlist.Add(new ItemRoom(RandomItem()));
                 break;
             case Cavern.CavernSizes.large://assuming large is set to 8x8 = 64 rooms. 13 used. Will add 30 more
                 for(int i = 0; i < 30; i++) roomlist.Add(RandomRoom());
+                roomlist.Add(new ItemRoom(RandomItem()));
+                roomlist.Add(new ItemRoom(RandomItem()));
                 roomlist.Add(new ItemRoom(RandomItem()));
                 roomlist.Add(new ItemRoom(RandomItem()));
                 roomlist.Add(new ItemRoom(RandomItem()));
