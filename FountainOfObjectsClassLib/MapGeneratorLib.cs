@@ -17,11 +17,12 @@ public class MapGenerator
                 cave[a,b] = new EmptyRoom();
             }
         }
+
+        cave[0,0] = new Enterance(); //must always be at this loc
+        AddFountainRoom(cave,intCSize);
         
         PopulateList(intCSize, type);
 
-        cave[0,0] = new Enterance(); //must always be at this loc
-        
         foreach(IRoom room in roomlist)
         {
             AddRoomToMap(room, cave, intCSize);
