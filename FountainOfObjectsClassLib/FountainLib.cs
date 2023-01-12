@@ -6,16 +6,19 @@ public class FountainGame
     public PlayerChar _player = new PlayerChar();
     public Cavern _cavern = new Cavern();
     public FountainUI _ui = new FountainUI();
+    
 
-    public FountainGame(Cavern.CavernSizes size)
+    public FountainGame()
     {
-        _cavern = new Cavern(size);
+        _cavern = new Cavern(Cavern.CavernSizes.small);
     }
 
     public void RunGame()
     {
+        _cavern = new Cavern(_ui.GetPlayerSizeChoice());
         string deathMessage = "Empty";
-        _cavern.GenerateTestMap();
+        //_cavern.GenerateTestMap();
+        _cavern.GenerateMap();
 
         do{
             deathMessage = PlayOneRound();

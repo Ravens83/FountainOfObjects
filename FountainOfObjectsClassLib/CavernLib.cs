@@ -8,6 +8,8 @@ public class Cavern
 
     private IRoom[,] Rooms {get;}
 
+    private MapGenerator _mapGen = new MapGenerator();
+
     public Cavern()
     {
         IntCSize = (int)CSize;
@@ -19,6 +21,11 @@ public class Cavern
         CSize = newSize;
         IntCSize = (int)CSize;
         Rooms = new IRoom[IntCSize,IntCSize];
+    }
+
+    public void GenerateMap()
+    {
+        _mapGen.Generate(Rooms, CSize);
     }
 
     public void GenerateTestMap()

@@ -1,5 +1,5 @@
 ﻿using FountainOfObjectsClassLib;
 
-FountainGame game = new FountainGame(Cavern.CavernSizes.small);
+FountainGame game = new FountainGame();
 
 game.RunGame();

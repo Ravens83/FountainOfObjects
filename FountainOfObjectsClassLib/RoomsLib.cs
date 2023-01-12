@@ -23,7 +23,7 @@ public class EmptyRoom : IRoom
 public class Enterance : IRoom
 {
     public string Sense() => "Empty";
-    public string RoomMessage() => "Empty";
+    public string RoomMessage() => "You see light coming from the cavern entrance.";
     public string SetPlayerEffect(PlayerChar p) => "You see light coming from the cavern entrance.";
     public IRoom RoomAltered(ListOfCommands.C action) => this;
     public bool SpecialEventRoom {get;} = false;

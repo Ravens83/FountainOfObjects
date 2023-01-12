@@ -2,6 +2,22 @@ namespace FountainOfObjectsClassLib;
 
 public class FountainUI
 {   
+    public Cavern.CavernSizes GetPlayerSizeChoice()
+    {
+        int choice = Toolbox.ReadInt("Choose cavesize, 1 = small, 2 = medium, 3 = large. You choose: ",1,3);
+
+        switch (choice)
+        {
+            case 1:
+                return Cavern.CavernSizes.small;
+            case 2:
+                return Cavern.CavernSizes.medium;
+            case 3:
+                return Cavern.CavernSizes.large;
+            default:
+                return Cavern.CavernSizes.small;
+        }
+    }
     public void PrintAction(string actionResult)
     {
         switch(actionResult)
