@@ -2,6 +2,12 @@ namespace FountainOfObjectsClassLib;
 
 public class FountainUI
 {   
+    public GameCodex Codex {get;} = new GameCodex();
+
+    public void InitCodex()
+    {
+        Codex.InitialiseLists();
+    }
     public Cavern.CavernSizes GetPlayerSizeChoice()
     {
         int choice = Toolbox.ReadInt("Choose cavesize, 1 = small, 2 = medium, 3 = large. You choose: ",1,3);
@@ -110,5 +116,22 @@ public class FountainUI
         Console.WriteLine(p.Equipment[itemnr-1].Description);
     }
 
+    public void PrintControls()
+    {
+        Console.WriteLine("These are the commands available in the game:");
+         
+        ListOfCommands.C curC;
+        foreach(var commandnr in Enum.GetValues<ListOfCommands.C>())
+        {
+            curC = (ListOfCommands.C)commandnr;
+            if(curC != ListOfCommands.C.invalid_command)
+            {
+                Console.Write(ListOfCommands.CommandMatcher(curC));
+                Console.Write(": ");
+                Console.Write(ListOfCommands.CommandExplanations(curC));
+                Console.Write("\n");
+            }
+        }
+    }
 }
 

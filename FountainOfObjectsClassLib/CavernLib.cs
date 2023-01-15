@@ -141,53 +141,7 @@ public class Cavern
         return output;
     }
 
-    public string PlayerAction(PlayerChar p, ListOfCommands.C pCommand)
-    {
-        string output = "Empty";
-        Location tempLoc = new Location(p.Loc.X,p.Loc.Y);
-        switch (pCommand)
-        {
-            case ListOfCommands.C.move_east:
-                tempLoc = new Location(p.Loc.X,p.Loc.Y+1);
-                output = TryToMove(p,tempLoc);
-                break;
-            case ListOfCommands.C.move_west:
-                tempLoc = new Location(p.Loc.X,p.Loc.Y-1);
-                output = TryToMove(p,tempLoc);
-                break;
-            case ListOfCommands.C.move_north:
-                tempLoc = new Location(p.Loc.X-1,p.Loc.Y);
-                output = TryToMove(p,tempLoc);
-                break;
-            case ListOfCommands.C.move_south:
-                tempLoc = new Location(p.Loc.X+1,p.Loc.Y);
-                output = TryToMove(p,tempLoc);
-                break;
-            case ListOfCommands.C.shoot_east:
-                tempLoc = new Location(p.Loc.X,p.Loc.Y+1);
-                output = ShootBow(tempLoc, p, pCommand);
-                break;
-            case ListOfCommands.C.shoot_west:
-                tempLoc = new Location(p.Loc.X,p.Loc.Y-1);
-                output = ShootBow(tempLoc, p, pCommand);
-                break;
-            case ListOfCommands.C.shoot_north:
-                tempLoc = new Location(p.Loc.X-1,p.Loc.Y);
-                output = ShootBow(tempLoc, p, pCommand);
-                break;
-            case ListOfCommands.C.shoot_south:
-                tempLoc = new Location(p.Loc.X+1,p.Loc.Y);
-                output = ShootBow(tempLoc, p, pCommand);
-                break;
-            case ListOfCommands.C.enable_fountain:
-                output = AlterARoom(p.Loc,pCommand);
-                break;
-            case ListOfCommands.C.show_equipment:
-            case ListOfCommands.C.help_menu:
-                break;
-        }
-        return output;
-    }
+
 
     public string ShootBow(Location loc, PlayerChar p, ListOfCommands.C pCommand)
     {

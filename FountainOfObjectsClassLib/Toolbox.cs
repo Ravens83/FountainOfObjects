@@ -1,7 +1,6 @@
 namespace FountainOfObjectsClassLib;
 
 //toolbox
-
 public static class Toolbox
 {
     public static bool UseAnItem(PlayerChar p, IEquipment item)

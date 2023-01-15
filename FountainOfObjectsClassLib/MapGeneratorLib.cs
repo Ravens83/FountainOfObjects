@@ -29,11 +29,9 @@ public class MapGenerator
         }
     }
 
-
-
     public void PopulateList(int intCSize, Cavern.CavernSizes type) //add event rooms to a list based on the size of the map
     {
-        //rooms to always add:  ENTERANCE EATS 3 SPOTS, SO MAXIMUM OF 16 - 3 = 13 rooms here
+        //rooms to always add:  ENTERANCE EATS 3 SPOTS, FOUNTAIN 1, SO MAXIMUM OF 16 - 4 = 12 rooms here
         roomlist.Add(new Amarok());
         roomlist.Add(new Amarok());
         roomlist.Add(new PitRoom());
@@ -44,13 +42,13 @@ public class MapGenerator
         //extra rooms for larger maps:
         switch(type)
         {
-            case Cavern.CavernSizes.medium: //assuming medium is set to 6x6 = 36 rooms. 13 used. Will add 13 more
+            case Cavern.CavernSizes.medium: //assuming medium is set to 6x6 = 36 rooms. 10 used.
                 for(int i = 0; i < 13; i++) roomlist.Add(RandomRoom());
                 roomlist.Add(new ItemRoom(RandomItem()));
                 roomlist.Add(new ItemRoom(RandomItem()));
                 roomlist.Add(new ItemRoom(RandomItem()));
                 break;
-            case Cavern.CavernSizes.large://assuming large is set to 8x8 = 64 rooms. 13 used. Will add 30 more
+            case Cavern.CavernSizes.large://assuming large is set to 8x8 = 64 rooms. 10 used.
                 for(int i = 0; i < 30; i++) roomlist.Add(RandomRoom());
                 roomlist.Add(new ItemRoom(RandomItem()));
                 roomlist.Add(new ItemRoom(RandomItem()));

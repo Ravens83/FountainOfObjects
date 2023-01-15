@@ -3,11 +3,11 @@
 
 public class FountainGame
 {
-    public PlayerChar _player = new PlayerChar();
-    public Cavern _cavern = new Cavern();
-    public FountainUI _ui = new FountainUI();
+    private PlayerChar _player = new PlayerChar();
+    private Cavern _cavern = new Cavern();
+    private FountainUI _ui = new FountainUI();
+    private Random rnd = new Random();
     
-
     public FountainGame()
     {
         _cavern = new Cavern(Cavern.CavernSizes.small);
@@ -15,6 +15,8 @@ public class FountainGame
 
     public void RunGame()
     {
+        _ui.InitCodex();
+        _ui.Codex.CodexStory("Write 'begin' to start the game: ");
         _cavern = new Cavern(_ui.GetPlayerSizeChoice());
         string deathMessage = "Empty";
         //_cavern.GenerateTestMap();
@@ -44,10 +46,15 @@ public class FountainGame
 
         _ui.PrintSensations(sensations);//prints current room and nearby sensations.
         string result = "Empty";
+        ListOfCommands.C playerCommand;
 
-        ListOfCommands.C playerCommand = _ui.GetPlayerCommand(); //player does action:
-        if(playerCommand == ListOfCommands.C.show_equipment) _ui.ShowInventory(_player);
-        result = _cavern.PlayerAction(_player, playerCommand);
+        do{
+            playerCommand = _ui.GetPlayerCommand();
+            result = PlayerAction(playerCommand); //non-action commands will not move on to further the game
+        }while(playerCommand == ListOfCommands.C.codex
+                || playerCommand == ListOfCommands.C.show_equipment
+                || playerCommand == ListOfCommands.C.help_menu); //checks for non-action commands
+        
         _ui.PrintAction(result);
 
         _cavern.FixPlayerLocation(_player); //check if location still legal;
@@ -69,7 +76,7 @@ public class FountainGame
         return roomMsg;
     }
 
-    public void DoSpecialRoomAction(IRoom curRoom, Location roomLoc) //must be expanded with any new special room
+    private void DoSpecialRoomAction(IRoom curRoom, Location roomLoc) //must be expanded with any new special room
                                                                      //room must become a non-special room at some point
                                                                     //to avoid inf loop - FIX NEEDED
     {
@@ -80,7 +87,7 @@ public class FountainGame
 
         if(curRoom.GetType() == specialRoomMaelstrom.GetType())
         {
-            Location newLoc = new Location(roomLoc.X+1,roomLoc.Y-2);
+            Location newLoc = new Location(rnd.Next(0,_cavern.IntCSize),rnd.Next(0,_cavern.IntCSize));
             if(_cavern.GetRoom(newLoc).GetType() == emptyRoom.GetType())
                 _cavern.SetRoom(specialRoomMaelstrom,newLoc);
             
@@ -98,34 +105,58 @@ public class FountainGame
         }
     }
 
-}
-
-
-
-public class PlayerChar
-{
-    public Location Loc {get; set;}
-    public bool Alive {get; set;} = true;
-    public List<IEquipment> Equipment = new List<IEquipment>();
-
-    private const int StandardStartArrows = 5;
-
-    public PlayerChar()
+    public string PlayerAction(ListOfCommands.C pCommand)
     {
-        for(int i = 0; i < StandardStartArrows; i++)
+        string output = "Empty";
+        Location tempLoc = new Location(_player.Loc.X,_player.Loc.Y);
+        switch (pCommand)
         {
-            Equipment.Add(new Arrow());
+            case ListOfCommands.C.move_east:
+                tempLoc = new Location(_player.Loc.X,_player.Loc.Y+1);
+                output = _cavern.TryToMove(_player,tempLoc);
+                break;
+            case ListOfCommands.C.move_west:
+                tempLoc = new Location(_player.Loc.X,_player.Loc.Y-1);
+                output = _cavern.TryToMove(_player,tempLoc);
+                break;
+            case ListOfCommands.C.move_north:
+                tempLoc = new Location(_player.Loc.X-1,_player.Loc.Y);
+                output = _cavern.TryToMove(_player,tempLoc);
+                break;
+            case ListOfCommands.C.move_south:
+                tempLoc = new Location(_player.Loc.X+1,_player.Loc.Y);
+                output = _cavern.TryToMove(_player,tempLoc);
+                break;
+            case ListOfCommands.C.shoot_east:
+                tempLoc = new Location(_player.Loc.X,_player.Loc.Y+1);
+                output = _cavern.ShootBow(tempLoc, _player, pCommand);
+                break;
+            case ListOfCommands.C.shoot_west:
+                tempLoc = new Location(_player.Loc.X,_player.Loc.Y-1);
+                output = _cavern.ShootBow(tempLoc, _player, pCommand);
+                break;
+            case ListOfCommands.C.shoot_north:
+                tempLoc = new Location(_player.Loc.X-1,_player.Loc.Y);
+                output = _cavern.ShootBow(tempLoc, _player, pCommand);
+                break;
+            case ListOfCommands.C.shoot_south:
+                tempLoc = new Location(_player.Loc.X+1,_player.Loc.Y);
+                output = _cavern.ShootBow(tempLoc, _player, pCommand);
+                break;
+            case ListOfCommands.C.enable_fountain:
+                output = _cavern.AlterARoom(_player.Loc,pCommand);
+                break;
+            case ListOfCommands.C.show_equipment:
+                _ui.ShowInventory(_player);
+                break;
+            case ListOfCommands.C.help_menu:
+                _ui.PrintControls();
+                break;
+            case ListOfCommands.C.codex:
+                _ui.Codex.CodexMenu();
+                break;
         }
+        return output;
     }
-}
 
-
-public struct Location
-{
-    public readonly int X,Y;
-
-    public Location(int newX, int newY)
-    {
-        X = newX; Y = newY;
-    }
 }
