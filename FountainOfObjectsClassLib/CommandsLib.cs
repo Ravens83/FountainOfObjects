@@ -33,25 +33,6 @@ public static class ListOfCommands
         return C.invalid_command;
     }
 
-    /*public static C CommandMatcher(string input)
-    {
-        if(input.ToLower().Trim() == "move east") return C.move_east;
-        if(input.ToLower().Trim() == "move west") return C.move_west;
-        if(input.ToLower().Trim() == "move north") return C.move_north;
-        if(input.ToLower().Trim() == "move south") return C.move_south;
-        if(input.ToLower().Trim() == "shoot east") return C.shoot_east;
-        if(input.ToLower().Trim() == "shoot west") return C.shoot_west;
-        if(input.ToLower().Trim() == "shoot north") return C.shoot_north;
-        if(input.ToLower().Trim() == "shoot south") return C.shoot_south;
-        if(input.ToLower().Trim() == "enable fountain") return C.enable_fountain;
-        if(input.ToLower().Trim() == "show equipment") return C.show_equipment;
-        if(input.ToLower().Trim() == "help") return C.help_menu;
-        if(input.ToLower().Trim() == "codex") return C.codex;
-        else return C.invalid_command;
-    }*/
-
-    
-
     public static string CommandMatcher(C input)
     {
         string output;
