@@ -15,24 +15,29 @@ public class FountainGame
 
     public void RunGame()
     {
-        _ui.InitCodex();
-        _ui.Codex.CodexStory("Write 'begin' to start the game: ");
-        _cavern = new Cavern(_ui.GetPlayerSizeChoice());
-        string deathMessage = "Empty";
-        //_cavern.GenerateTestMap();
-        _cavern.GenerateMap();
+        while(true)
+        {
+            _ui.InitCodex();
+            _ui.Codex.CodexStory("Write 'begin' to start the game: ");
+            _cavern = new Cavern(_ui.GetPlayerSizeChoice());
+            string deathMessage = "Empty";
+            //_cavern.GenerateTestMap();
+            _cavern.GenerateMap();
 
-        do{
-            deathMessage = PlayOneRound();
-            
-        }while(!_cavern.Win(_player) && _player.Alive);
+            do{
+                deathMessage = PlayOneRound();
+                
+            }while(!_cavern.Win(_player) && _player.Alive);
 
-        if(!_player.Alive)
-        { 
-            
-            _ui.LossPrint(deathMessage);
+            if(!_player.Alive)
+            { 
+                
+                _ui.LossPrint(deathMessage);
+            }
+            else _ui.VictoryPrint();
+
+            if(!_ui.playAgain()) return;
         }
-        else _ui.VictoryPrint();
 
     }
 

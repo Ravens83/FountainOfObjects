@@ -133,5 +133,14 @@ public class FountainUI
             }
         }
     }
+
+    public bool playAgain()
+    {
+        Console.WriteLine();
+        Console.WriteLine("Press the any key to play another game or type 'quit' to exit.");
+        string command = Toolbox.ReadString("Play again?: ");
+        if(command == "quit") return false;
+        return true;
+    }
 }
 
